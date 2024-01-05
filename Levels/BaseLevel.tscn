@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgbei4nvf07jq"]
+[gd_scene load_steps=15 format=3 uid="uid://dgbei4nvf07jq"]
 
 [ext_resource type="PackedScene" uid="uid://dwpx18ruc4s8u" path="res://RayPickerCamera/ray_picker_camera.tscn" id="1_843e6"]
 [ext_resource type="MeshLibrary" uid="uid://dfuptt2f0bx8s" path="res://MeshLibraries/SpaceLibrary.tres" id="1_s77ie"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://btse5h37wx5rm" path="res://Base/base.tscn" id="3_pct4n"]
 [ext_resource type="Script" path="res://turret_manager.gd" id="5_8oce3"]
 [ext_resource type="PackedScene" uid="uid://cp2lgmmanou8a" path="res://Turret/turret.tscn" id="6_ovc21"]
+[ext_resource type="Script" path="res://bank.gd" id="8_cjdta"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_84nq5"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -30,6 +31,11 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_ofsob"]
+font_size = 64
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [node name="BaseLevel" type="Node3D"]
 
@@ -112,5 +118,25 @@ autostart = true
 script = ExtResource("5_8oce3")
 turret = ExtResource("6_ovc21")
 enemy_path = NodePath("../EnemyPath")
+
+[node name="Bank" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("8_cjdta")
+
+[node name="Label" type="Label" parent="Bank"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "placeholder"
+label_settings = SubResource("LabelSettings_ofsob")
 
 [connection signal="timeout" from="EnemyPath/Timer" to="EnemyPath" method="spawn_enemy"]
