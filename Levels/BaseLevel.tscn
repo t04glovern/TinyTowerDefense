@@ -4,7 +4,7 @@
 [ext_resource type="MeshLibrary" uid="uid://dfuptt2f0bx8s" path="res://MeshLibraries/SpaceLibrary.tres" id="1_s77ie"]
 [ext_resource type="PackedScene" uid="uid://cmqe0hesqhkcn" path="res://Enemy/enemy.tscn" id="2_f3fgo"]
 [ext_resource type="PackedScene" uid="uid://btse5h37wx5rm" path="res://Base/base.tscn" id="3_pct4n"]
-[ext_resource type="Script" path="res://Levels/TurretManager.gd" id="5_8oce3"]
+[ext_resource type="Script" path="res://Levels/turret_manager.gd" id="5_8oce3"]
 [ext_resource type="PackedScene" uid="uid://cp2lgmmanou8a" path="res://Turret/turret.tscn" id="6_ovc21"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_84nq5"]
@@ -44,8 +44,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(100, 2, 100)
 material = SubResource("StandardMaterial3D_vbmah")
 
-[node name="RayPickerCamera" parent="." node_paths=PackedStringArray("gridmap") instance=ExtResource("1_843e6")]
+[node name="RayPickerCamera" parent="." node_paths=PackedStringArray("gridmap", "turret_manager") instance=ExtResource("1_843e6")]
 gridmap = NodePath("../GridMap")
+turret_manager = NodePath("../TurretManager")
 
 [node name="GridMap" type="GridMap" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0347259, -1.90735e-06, -0.00266647)
