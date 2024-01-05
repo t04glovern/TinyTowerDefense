@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dgbei4nvf07jq"]
+[gd_scene load_steps=21 format=3 uid="uid://dgbei4nvf07jq"]
 
 [ext_resource type="PackedScene" uid="uid://dwpx18ruc4s8u" path="res://RayPickerCamera/ray_picker_camera.tscn" id="1_843e6"]
 [ext_resource type="MeshLibrary" uid="uid://dfuptt2f0bx8s" path="res://MeshLibraries/SpaceLibrary.tres" id="1_s77ie"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://btse5h37wx5rm" path="res://Base/base.tscn" id="3_pct4n"]
 [ext_resource type="Script" path="res://turret_manager.gd" id="5_8oce3"]
 [ext_resource type="PackedScene" uid="uid://cp2lgmmanou8a" path="res://Turret/turret.tscn" id="6_ovc21"]
+[ext_resource type="FontFile" uid="uid://bbn2b6p4v1k67" path="res://Assets/Asap/static/Asap-Bold.ttf" id="8_0osgv"]
 [ext_resource type="Script" path="res://bank.gd" id="8_cjdta"]
 [ext_resource type="PackedScene" uid="uid://ceblnh73bm43i" path="res://DifficultyManager/difficulty_manager.tscn" id="9_o07t2"]
 [ext_resource type="PackedScene" uid="uid://vxknrujg3jn0" path="res://UserInterface/victory_layer.tscn" id="10_jtivm"]
@@ -37,6 +38,9 @@ point_count = 5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nulkv"]
 albedo_color = Color(0.372549, 0.372549, 0.372549, 1)
 
+[sub_resource type="Theme" id="Theme_bl6ax"]
+default_font = ExtResource("8_0osgv")
+
 [sub_resource type="LabelSettings" id="LabelSettings_ofsob"]
 font_size = 64
 outline_size = 16
@@ -45,7 +49,7 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="Curve" id="Curve_r2dk3"]
 min_value = 10.0
 max_value = 150.0
-_data = [Vector2(0, 10), 0.0, 140.0, 0, 1, Vector2(1, 150), 140.0, 0.0, 1, 0]
+_data = [Vector2(0, 42.7881), 0.0, 107.212, 0, 1, Vector2(1, 150), 107.212, 0.0, 1, 0]
 point_count = 2
 
 [node name="BaseLevel" type="Node3D"]
@@ -127,7 +131,6 @@ wait_time = 2.0
 autostart = true
 
 [node name="Base" parent="." instance=ExtResource("3_pct4n")]
-max_health = 50
 
 [node name="TurretManager" type="Node3D" parent="." node_paths=PackedStringArray("enemy_path")]
 script = ExtResource("5_8oce3")
@@ -141,6 +144,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = SubResource("Theme_bl6ax")
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
@@ -153,8 +157,10 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "placeholder"
 label_settings = SubResource("LabelSettings_ofsob")
+uppercase = true
 
 [node name="DifficultyManager" parent="." instance=ExtResource("9_o07t2")]
+game_length = 180.0
 enemy_health_curve = SubResource("Curve_r2dk3")
 
 [node name="VictoryLayer" parent="." instance=ExtResource("10_jtivm")]
