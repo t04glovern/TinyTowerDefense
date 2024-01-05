@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dgbei4nvf07jq"]
+[gd_scene load_steps=16 format=3 uid="uid://dgbei4nvf07jq"]
 
 [ext_resource type="PackedScene" uid="uid://dwpx18ruc4s8u" path="res://RayPickerCamera/ray_picker_camera.tscn" id="1_843e6"]
 [ext_resource type="MeshLibrary" uid="uid://dfuptt2f0bx8s" path="res://MeshLibraries/SpaceLibrary.tres" id="1_s77ie"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://turret_manager.gd" id="5_8oce3"]
 [ext_resource type="PackedScene" uid="uid://cp2lgmmanou8a" path="res://Turret/turret.tscn" id="6_ovc21"]
 [ext_resource type="Script" path="res://bank.gd" id="8_cjdta"]
+[ext_resource type="PackedScene" uid="uid://ceblnh73bm43i" path="res://DifficultyManager/difficulty_manager.tscn" id="9_o07t2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_84nq5"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -64,10 +65,11 @@ data = {
 "cells": PackedInt32Array(65535, 65534, 0, 65535, 2, 0, 65531, 65535, 0, 3, 2, 0, 65532, 65534, 0, 2, 2, 0, 1, 2, 0, 65531, 65534, 0, 65531, 0, 0, 65532, 2, 0, 65533, 2, 0, 65534, 2, 0, 0, 2, 0, 65531, 2, 0, 3, 65534, 0, 2, 65534, 0, 1, 65534, 0, 0, 65534, 0, 4, 65534, 0, 4, 65535, 0, 4, 0, 0, 4, 1, 0, 4, 2, 0, 65534, 65534, 0, 65532, 65535, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0)
 }
 
-[node name="EnemyPath" type="Path3D" parent="."]
+[node name="EnemyPath" type="Path3D" parent="." node_paths=PackedStringArray("difficulty_manager")]
 curve = SubResource("Curve3D_cm08p")
 script = ExtResource("3_acei3")
 enemy_scene = ExtResource("2_f3fgo")
+difficulty_manager = NodePath("../DifficultyManager")
 
 [node name="Road" type="CSGPolygon3D" parent="EnemyPath"]
 polygon = PackedVector2Array(-1, 0, -1, 0.1, 1, 0.1, 1, 0)
@@ -138,5 +140,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "placeholder"
 label_settings = SubResource("LabelSettings_ofsob")
+
+[node name="DifficultyManager" parent="." instance=ExtResource("9_o07t2")]
 
 [connection signal="timeout" from="EnemyPath/Timer" to="EnemyPath" method="spawn_enemy"]
